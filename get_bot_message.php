@@ -2,8 +2,8 @@
 date_default_timezone_set('Asia/Dhaka');
 require_once 'dbconfig/config.php';
 
-$stmt = $db->quote($_POST['txt']);
-$sql="SELECT reply from chatbot_hints WHERE question LIKE $stmt";
+$stmt = $db->quote('%' . strtoupper($_POST['txt']) . '%');
+$sql  = "SELECT reply FROM chatbot_hints WHERE UPPER(question) LIKE $stmt";
 $result = $db->prepare($sql);
 $result->execute();
 if($result->rowCount() > 0){
@@ -57,3 +57,4 @@ echo " ";
 
 </body>
 </html>-->
+
